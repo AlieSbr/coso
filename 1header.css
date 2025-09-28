@@ -1,0 +1,210 @@
+
+/* Barra de navegación */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(6,38,120,0.5);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    padding: 20px 30px;
+    z-index: 1000;
+    font-family: sans-serif;
+    color: white;
+}
+
+/* Lista de enlaces */
+.navbar .nav-list {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 40px;
+}
+
+.navbar .nav-list li a {
+    font-weight: 700;
+    font-size: 22px;
+    padding: 12px 18px;
+    border-radius: 8px;
+    display: inline-block;
+    position: relative;
+    transition: font-size 0.5s, color 0.5s;
+    color: white;
+    text-decoration: none;
+}
+
+.navbar .nav-list li a::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 100%;
+    height: 3px;
+    background-color: #ffffff;
+    border-radius: 2px;
+    transform: translateX(-50%) scaleX(0);
+    transform-origin: center;
+    transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.navbar .nav-list li a:hover::after {
+    transform: translateX(-50%) scaleX(1);
+}
+
+.navbar .nav-list li a:hover {
+    font-size: 26px;
+    color: #ffffff;
+}
+
+/* 3 barritas */
+.ham-menu {
+    height: 50px;
+    width: 40px;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    z-index: 1002;
+}
+
+.ham-menu span {
+    height: 5px;
+    width: 100%;
+    background-color: white;
+    border-radius: 25px;
+    transition: 0.3s ease, background-color 0.3s;
+}
+
+.ham-menu:hover span {
+    background-color: #6F86FF;
+}
+
+.ham-menu.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px,5px);
+}
+
+.ham-menu.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.ham-menu.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px,-5px);
+}
+
+/* Menu lateral */
+.off-screen-menu {
+    background-color: #333959;
+    height: 100vh;
+    width: 100%;
+    max-width: 400px;
+    position: fixed;
+    top: 0;
+    left: -400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 2rem;
+    transition: left 0.6s ease;
+    z-index: 1001;
+    padding-top: 170px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    font-family: sans-serif;
+}
+
+.off-screen-menu.active {
+    left: 0;
+}
+
+.off-screen-menu .menu-title {
+    font-size: 2.5rem;
+    color: white;
+    margin-bottom: 40px;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.off-screen-menu.active .menu-title {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.off-screen-menu ul {
+    width: 90%;
+    text-align: center;
+}
+
+.off-screen-menu ul li {
+    width: 100%;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    margin: 8px 0;
+    transition: background 0.3s ease;
+}
+
+.off-screen-menu ul li a {
+    display: block;
+    padding: 20px 0;
+    font-size: 2rem;
+    color: white;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: transform 0.5s ease, opacity 0.5s ease, color 0.3s ease;
+    text-decoration: none;
+}
+
+.off-screen-menu.active ul li a {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.off-screen-menu.active ul li:nth-child(1) a { transition-delay: 0.05s; }
+.off-screen-menu.active ul li:nth-child(2) a { transition-delay: 0.1s; }
+.off-screen-menu.active ul li:nth-child(3) a { transition-delay: 0.15s; }
+
+.off-screen-menu ul li a:hover {
+    color: #6F86FF;
+    transform: translateX(10px) scale(1.05);
+    background: rgba(255,255,255,0.05);
+    border-radius: 8px;
+}
+
+.off-screen-menu ul li:last-child {
+    border-bottom: none;
+}
+
+.close-menu {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 4rem;
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-menu:hover {
+    color: #6F86FF;
+}
+
+@media (max-width: 700px) {
+    .nav-list {
+        display: none;
+    }
+}
